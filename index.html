@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    </div>
+
+    <script>
+
+        fetch('LICENSE.md')
+            .then(response => {
+                if (!response.ok) throw new Error('Не удалось загрузить LICENSE.md');
+                return response.text();
+            })
+            .then(markdown => {
+                // Простой способ конвертировать Markdown в HTML для отображения
+                const htmlContent = markdown
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+                    .replace(/^## (.*$)/gm, '<h2>$2</h2>')
+                    .replace(/^### (.*$)/gm, '<h3>$3</h3>');
+                document.querySelector('.markdown-body').innerHTML = htmlContent;
+            })
+            .catch(error => {
+                document.querySelector('.markdown-body').innerHTML = `<p style="color: red;">Ошибка: ${error.message}</p><p>Убедитесь, что файл <code>LICENSE.md</code> существует в корне репозитория.</p>`;
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+url: "https://hanepat.github.io" 
+baseurl: "/tradingview-desktop-premium"
+
+plugins:
+  - jekyll-sitemap
